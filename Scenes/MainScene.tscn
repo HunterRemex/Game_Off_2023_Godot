@@ -71,15 +71,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfuaj"]
 size = Vector2(14, 21)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" node_paths=PackedStringArray("characterSprite")]
 script = ExtResource("1_s2n22")
+characterSprite = NodePath("AnimatedSprite2D")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_uymp7")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
 offset = Vector2(0, -5)
 
