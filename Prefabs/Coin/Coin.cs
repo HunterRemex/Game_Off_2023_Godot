@@ -1,15 +1,15 @@
-using Godot;
-using System;
-
-public partial class Coin : Area2D
+namespace CoinDashGaming.Scripts
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+	using Godot;
+	using System;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public partial class Coin : Area2D
 	{
+		#region Private Methods
+		private void Pickup()
+		{
+			QueueFree();
+		}
+		#endregion
 	}
 }
