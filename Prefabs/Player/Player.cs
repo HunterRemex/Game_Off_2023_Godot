@@ -94,7 +94,6 @@ namespace CoinDashGaming.Scripts
 		#endregion
 
 		#region Godot Methods
-		// Called when the node enters the scene tree for the first time.
 		public override void _Ready()
 		{
 			_screenSize = GetViewport().GetVisibleRect().Size;
@@ -102,7 +101,6 @@ namespace CoinDashGaming.Scripts
 			_characterColliderHalfYSize = _characterCollider.Shape.GetRect().Size.Y / 2.0f;
 		}
 
-		// Called every frame. 'delta' is the elapsed time since the previous frame.
 		public override void _Process(double delta)
 		{
 			_characterVelocity = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
