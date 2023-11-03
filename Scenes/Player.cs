@@ -1,13 +1,21 @@
-using Godot;
-
 namespace CoinDashGaming.Scripts
 {
+	using Godot;
+
 	public partial class Player : Area2D
 	{
 		#region CONSTANTS
 		private const string CHARACTER_ANIM_IDLE = "idle";
 		private const string CHARACTER_ANIM_RUN = "run";
 		private const string CHARACTER_ANIM_HURT = "hurt";
+		#endregion
+
+		#region Signal Delegates
+		[Signal]
+		public delegate void PickupEventHandler();
+
+		[Signal]
+		public delegate void HurtEventHandler();
 		#endregion
 
 		#region Inspector-Set Fields
@@ -52,6 +60,35 @@ namespace CoinDashGaming.Scripts
 			if ( velocity.X != 0 )
 			{
 				_characterSprite.FlipH = Mathf.Sign(velocity.X) < 0;
+			}
+		}
+
+		private void Start()
+		{
+			SetProcess(true);
+			Position = _screenSize / 2.0f;
+			_characterSprite.Animation = CHARACTER_ANIM_IDLE;
+		}
+
+		private void Die()
+		{
+			_characterSprite.Animation = CHARACTER_ANIM_HURT;
+			SetProcess(false);
+		}
+		#endregion
+
+		#region Signal Receivers
+		private void _on_area_entered(Area2D otherArea)
+		{
+			if ( otherArea.IsInGroup(StringConstants.GROUP_COINS) == true )
+			{
+				// otherArea.Connect(SignalName.Pickup, this.call, nameof(_on_area_entered));
+				EmitSignal(nameof(SignalName.Pickup));
+			}
+			else if ( otherArea.IsInGroup(StringConstants.GROUP_OBSTACLES) == true )
+			{
+				EmitSignal(nameof(SignalName.Hurt));
+				Die();
 			}
 		}
 		#endregion

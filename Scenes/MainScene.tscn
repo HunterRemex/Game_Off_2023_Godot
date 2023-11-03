@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b0kkyo7lui7kf" path="res://assets/player/idle/player-idle-1.png" id="1_5hly5"]
 [ext_resource type="Texture2D" uid="uid://ba12rq2y3rdje" path="res://assets/player/hurt/player-hurt-1.png" id="1_22vah"]
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_jiron"]
+[ext_resource type="Script" path="res://Scenes/Player.cs" id="1_yjqw4"]
 [ext_resource type="Texture2D" uid="uid://cjrrov8a50flp" path="res://assets/player/idle/player-idle-2.png" id="2_e8ec5"]
 [ext_resource type="Texture2D" uid="uid://f7i4ml07rlku" path="res://assets/player/hurt/player-hurt-2.png" id="2_l8307"]
 [ext_resource type="Texture2D" uid="uid://d04r46ulmp7vm" path="res://assets/player/idle/player-idle-3.png" id="3_vrohw"]
@@ -72,7 +72,8 @@ animations = [{
 size = Vector2(14, 21)
 
 [node name="Player" type="Area2D" node_paths=PackedStringArray("_characterSprite", "_characterCollider")]
-script = ExtResource("1_jiron")
+input_pickable = false
+script = ExtResource("1_yjqw4")
 _characterSprite = NodePath("AnimatedSprite2D")
 _characterCollider = NodePath("CollisionShape2D")
 metadata/_edit_group_ = true
@@ -88,3 +89,5 @@ offset = Vector2(0, -5)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_dfuaj")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
