@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://birlm510cee76"]
+
+[ext_resource type="ArrayMesh" uid="uid://c4pykc17xx22s" path="res://DebugViewGame/Prefabs/Objects/SpinningTop/SpinningTop.tres" id="1_4bhx8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rr5vh"]
+
+[node name="SpinningTop" type="RigidBody3D"]
+mass = 0.1
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.5, 0)
+angular_velocity = Vector3(0, 0.0872665, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_rr5vh")
+
+[node name="Cylinder" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_4bhx8")
+skeleton = NodePath("../..")
