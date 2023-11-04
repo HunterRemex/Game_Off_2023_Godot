@@ -46,7 +46,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("11_od3lk")
 }, {
-"duration": 1.0,
+"duration": 10.0,
 "texture": ExtResource("12_15sal")
 }],
 "loop": true,
@@ -57,9 +57,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_yfsnh"]
 radius = 21.0
 
-[node name="Coin" type="Area2D" groups=["coins"]]
+[node name="Coin" type="Area2D" node_paths=PackedStringArray("colliderShape", "coinSprite") groups=["coins"]]
 input_pickable = false
 script = ExtResource("1_klqdo")
+colliderShape = NodePath("CollisionShape2D")
+coinSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
@@ -70,3 +72,5 @@ frame_progress = 0.862068
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yfsnh")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
