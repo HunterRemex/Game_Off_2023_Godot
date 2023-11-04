@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2g6ru1lres6j"]
+
+[ext_resource type="PackedScene" uid="uid://5xycx1sreuon" path="res://DebugViewGame/Prefabs/InspectorTable/InspectorTable.tscn" id="1_mudpy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cgjjh"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_xbs5s"]
+sky_material = SubResource("ProceduralSkyMaterial_cgjjh")
+
+[sub_resource type="Environment" id="Environment_5dwtu"]
+background_mode = 2
+sky = SubResource("Sky_xbs5s")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_mh4t2"]
+
+[node name="MainScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5dwtu")
+camera_attributes = SubResource("CameraAttributesPractical_mh4t2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, -4.76837e-07, 3.22672, -3.69624)
+fov = 51.282
+
+[node name="InspectorTable" parent="." instance=ExtResource("1_mudpy")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, -4.76837e-07, 3.22672, -3.69624)
+directional_shadow_mode = 1
