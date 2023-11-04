@@ -1,27 +1,33 @@
 namespace CoinDashGaming.Scripts.FlawedBuilder
 {
+	using DebugViewGame.Prefabs.Objects.SpinningTop;
 	using Godot;
 
 	public partial class SpinningTopBuilder : IUnbalancedBuilder
 	{
+		#region Privatae Fields
+		private SpinningTop _spinningTop;
+		#endregion
+
 		#region IUnbalancedBuilder Members
+		public int TotalFlaws => _spinningTop.TotalFlaws;
+
+		public int FlawsSolved => _spinningTop.FlawsSolved;
+
 		public UnbalancedObject Build()
 		{
-			throw new System.NotImplementedException();
+			_spinningTop = new SpinningTop();
+			return _spinningTop;
 		}
 
-		public int TotalFlaws { get; } = 3;
-
-		public int FlawsSolved { get; }
-
-		public void SolveFlaw(int index)
+		public Node GetConstructedObject()
 		{
-			throw new System.NotImplementedException();
-		}
-
-		public Signal TestExamination()
-		{
-			throw new System.NotImplementedException();
+			SpinningTop node = _spinningTop;
+			if ( _spinningTop == null )
+			{
+				node = Build() as SpinningTop;
+			}
+			return node;
 		}
 		#endregion
 	}

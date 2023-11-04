@@ -12,13 +12,14 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 	public interface IUnbalancedBuilder
 	{
 		public int TotalFlaws { get; }
-
 		public int FlawsSolved { get; }
 
 		public UnbalancedObject Build();
 
-		public void SolveFlaw(int index);
-
-		public Signal TestExamination();
+		/// <summary>
+		/// Returns the unbalanced object if it exists, otherwise Builds a new unbalanced object
+		/// </summary>
+		/// <returns></returns>
+		public Node GetConstructedObject();
 	}
 }
