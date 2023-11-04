@@ -1,6 +1,6 @@
 [gd_resource type="ArrayMesh" load_steps=2 format=3 uid="uid://c4pykc17xx22s"]
 
-[ext_resource type="Material" uid="uid://chffxwyaxk3xn" path="res://DebugViewGame/Prefabs/InspectorTable/M_Background.tres" id="1_8w3qh"]
+[ext_resource type="Material" uid="uid://chffxwyaxk3xn" path="res://DebugViewGame/Materials/M_Background.tres" id="1_8w3qh"]
 
 [resource]
 _surfaces = [{

@@ -4,7 +4,6 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 
 	public partial class UnbalancedObject : Node3D
 	{
-		private Camera3D camera;
 		public override void _Process(double delta)
 		{
 			base._Process(delta);

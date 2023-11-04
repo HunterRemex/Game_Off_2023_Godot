@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2g6ru1lres6j"]
+[gd_scene load_steps=8 format=3 uid="uid://b2g6ru1lres6j"]
 
+[ext_resource type="PackedScene" uid="uid://dw6xalc642l6l" path="res://DebugViewGame/Prefabs/DebugStartGameUI/DVStartScreen.tscn" id="1_m321m"]
 [ext_resource type="PackedScene" uid="uid://5xycx1sreuon" path="res://DebugViewGame/Prefabs/InspectorTable/InspectorTable.tscn" id="1_mudpy"]
+[ext_resource type="PackedScene" uid="uid://birlm510cee76" path="res://DebugViewGame/Prefabs/Objects/SpinningTop/SpinningTop.tscn" id="3_u06oy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cgjjh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -23,12 +25,18 @@ glow_enabled = true
 environment = SubResource("Environment_5dwtu")
 camera_attributes = SubResource("CameraAttributesPractical_mh4t2")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, -4.76837e-07, 3.22672, -3.69624)
+light_angular_distance = 2.5
+directional_shadow_mode = 1
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, -4.76837e-07, 3.22672, -3.69624)
 fov = 51.282
 
+[node name="DVStartScreen" parent="Camera3D" instance=ExtResource("1_m321m")]
+
 [node name="InspectorTable" parent="." instance=ExtResource("1_mudpy")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, -4.76837e-07, 3.22672, -3.69624)
-directional_shadow_mode = 1
+[node name="SpinningTop" parent="." instance=ExtResource("3_u06oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 3)

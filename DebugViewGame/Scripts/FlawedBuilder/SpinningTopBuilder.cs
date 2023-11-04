@@ -2,9 +2,8 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 {
 	using Godot;
 
-	public class SpinningTopBuilder : IUnbalancedBuilder
+	public partial class SpinningTopBuilder : IUnbalancedBuilder
 	{
-
 		#region IUnbalancedBuilder Members
 		public UnbalancedObject Build()
 		{

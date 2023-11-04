@@ -1,7 +1,17 @@
 namespace CoinDashGaming.DebugViewGame.Prefabs.DebugStartGameUI
 {
-	public class GameController
+	using Godot;
+
+	public partial class GameController : Node
 	{
-		
+		public override void _Process(double delta)
+		{
+			base._Process(delta);
+		}
+
+		public override void _Ready()
+		{
+			base._Ready();
+		}
 	}
 }
