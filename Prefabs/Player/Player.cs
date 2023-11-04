@@ -20,14 +20,14 @@ namespace CoinDashGaming.Scripts
 
 		#region Inspector-Set Fields
 		[Export]
-		private float _moveSpeed = 350.0f;
+		private float moveSpeed = 350.0f;
 		[Export]
-		private AnimatedSprite2D _characterSprite;
+		private AnimatedSprite2D characterSprite;
 		[Export]
-		private CollisionShape2D _characterCollider;
+		private CollisionShape2D characterCollider;
 		#endregion
 
-		#region Private Fields
+		#region Variables
 		private Vector2 _characterVelocity;
 		private Vector2 _screenSize;
 
@@ -35,10 +35,19 @@ namespace CoinDashGaming.Scripts
 		private float _characterColliderHalfYSize;
 		#endregion
 
+		#region Internal Methods
+		internal void Start()
+		{
+			SetProcess(true);
+			Position = _screenSize / 2.0f;
+			characterSprite.Animation = CHARACTER_ANIM_IDLE;
+		}
+		#endregion
+
 		#region Private Methods
 		private void UpdatePosition(Vector2 velocity, float deltaTime)
 		{
-			Vector2 newPos = Position + velocity * _moveSpeed * deltaTime;
+			Vector2 newPos = Position + velocity * moveSpeed * deltaTime;
 			// Clamp the position to the screen
 			newPos.X = Mathf.Clamp(newPos.X, _characterColliderHalfXSize, _screenSize.X - _characterColliderHalfXSize);
 			newPos.Y = Mathf.Clamp(newPos.Y, _characterColliderHalfYSize, _screenSize.Y - _characterColliderHalfYSize);
@@ -50,46 +59,39 @@ namespace CoinDashGaming.Scripts
 		{
 			if ( velocity.Length() > 0 )
 			{
-				_characterSprite.Animation = CHARACTER_ANIM_RUN;
+				characterSprite.Animation = CHARACTER_ANIM_RUN;
 			}
 			else
 			{
-				_characterSprite.Animation = CHARACTER_ANIM_IDLE;
+				characterSprite.Animation = CHARACTER_ANIM_IDLE;
 			}
 
 			if ( velocity.X != 0 )
 			{
-				_characterSprite.FlipH = Mathf.Sign(velocity.X) < 0;
+				characterSprite.FlipH = Mathf.Sign(velocity.X) < 0;
 			}
-		}
-
-		private void Start()
-		{
-			SetProcess(true);
-			Position = _screenSize / 2.0f;
-			_characterSprite.Animation = CHARACTER_ANIM_IDLE;
 		}
 
 		private void Die()
 		{
-			_characterSprite.Animation = CHARACTER_ANIM_HURT;
+			characterSprite.Animation = CHARACTER_ANIM_HURT;
 			SetProcess(false);
 		}
 		#endregion
 
 		#region Signal Receivers
-		private void _on_area_entered(Area2D otherArea)
+		private void OnAreaEntered(Area2D otherArea)
 		{
-			if ( otherArea.IsInGroup(StringConstants.GROUP_COINS) == true )
+			if ( otherArea.IsInGroup(StringConstants.GROUP_OBSTACLES) == true )
 			{
-				// otherArea.Connect(SignalName.Pickup, this.call, nameof(_on_area_entered));
-				EmitSignal(nameof(SignalName.Pickup));
-			}
-			else if ( otherArea.IsInGroup(StringConstants.GROUP_OBSTACLES) == true )
-			{
-				EmitSignal(nameof(SignalName.Hurt));
+				EmitSignal(SignalName.Hurt);
 				Die();
 			}
+		}
+
+		private void OnPickup()
+		{
+			GD.Print("Pickup on Player");
 		}
 		#endregion
 
@@ -97,8 +99,8 @@ namespace CoinDashGaming.Scripts
 		public override void _Ready()
 		{
 			_screenSize = GetViewport().GetVisibleRect().Size;
-			_characterColliderHalfXSize = _characterCollider.Shape.GetRect().Size.X / 2.0f;
-			_characterColliderHalfYSize = _characterCollider.Shape.GetRect().Size.Y / 2.0f;
+			_characterColliderHalfXSize = characterCollider.Shape.GetRect().Size.X / 2.0f;
+			_characterColliderHalfYSize = characterCollider.Shape.GetRect().Size.Y / 2.0f;
 		}
 
 		public override void _Process(double delta)
