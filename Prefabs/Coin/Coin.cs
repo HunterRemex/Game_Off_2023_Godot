@@ -32,25 +32,20 @@ namespace CoinDashGaming.Scripts
 		}
 		#endregion
 
-		#region Private Methods
+		#region Signal Receivers
+		private void OnAreaEntered(Area2D otherArea)
+		{
+			if ( otherArea.IsInGroup(StringConstants.GROUP_PLAYER) == true )
+			{
+				otherArea.EmitSignal(SignalName.Pickup);
+				EmitSignal(SignalName.Pickup);
+			}
+		}
+
 		private void OnPickup()
 		{
 			GD.Print("Coin picked up!");
 			QueueFree();
-		}
-		#endregion
-
-		#region Signal Receivers
-		private void OnAreaEntered(Area2D otherArea)
-		{
-			GD.Print("Coin Entered");
-			if ( otherArea.IsInGroup(StringConstants.GROUP_PLAYER) == true )
-			{
-				GD.Print("Player picked up a coin");
-				// otherArea.Connect(SignalName.Pickup, new Godot.Callable(otherArea, SignalName.Pickup));
-				otherArea.EmitSignal(SignalName.Pickup);
-				EmitSignal(SignalName.Pickup);
-			}
 		}
 		#endregion
 
