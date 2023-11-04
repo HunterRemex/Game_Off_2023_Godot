@@ -101,6 +101,7 @@ namespace CoinDashGaming.Scripts
 			_screenSize = GetViewport().GetVisibleRect().Size;
 			_characterColliderHalfXSize = characterCollider.Shape.GetRect().Size.X / 2.0f;
 			_characterColliderHalfYSize = characterCollider.Shape.GetRect().Size.Y / 2.0f;
+			// Connect(SignalName.Pickup, new Callable(this, nameof(OnPickup)));
 		}
 
 		public override void _Process(double delta)

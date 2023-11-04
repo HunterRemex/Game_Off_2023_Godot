@@ -90,4 +90,5 @@ offset = Vector2(0, -5)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_dfuaj")
 
+[connection signal="Pickup" from="." to="." method="OnPickup"]
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]

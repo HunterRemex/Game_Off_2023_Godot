@@ -59,6 +59,7 @@ namespace CoinDashGaming.Scripts
 		{
 			_colliderRadius = colliderShape.Shape.GetRect().Size.X / 2.0f;
 			coinSprite.Frame = GD.RandRange(0, coinSprite.SpriteFrames.GetFrameCount(COIN_ANIM_IDLE));
+			Connect(SignalName.Pickup, new Callable(this, nameof(OnPickup)));
 		}
 		#endregion
 	}
