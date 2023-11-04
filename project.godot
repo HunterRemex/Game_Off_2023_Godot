@@ -26,6 +26,10 @@ window/vsync/vsync_mode=2
 
 project/assembly_name="CoinDashGaming"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/csgtomeshinstance/plugin.cfg")
+
 [physics]
 
 2d/run_on_separate_thread=true
