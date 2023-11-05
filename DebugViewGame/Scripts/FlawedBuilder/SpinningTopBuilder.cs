@@ -1,11 +1,16 @@
 namespace CoinDashGaming.Scripts.FlawedBuilder
 {
 	using DebugViewGame.Prefabs.Objects.SpinningTop;
+	using DebugViewGame.Resources;
 	using Godot;
 
 	public partial class SpinningTopBuilder : IUnbalancedBuilder
 	{
-		#region Privatae Fields
+		#region CONSTANTS
+		private const string PREFAB_METADATA_NAME = "prefabToInstantiate";
+		#endregion
+		#region Private Fields
+		private PackedScene _spinningTopPrefab;
 		private SpinningTop _spinningTop;
 		#endregion
 
@@ -16,7 +21,12 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 
 		public UnbalancedObject Build()
 		{
-			_spinningTop = new SpinningTop();
+			if (_spinningTop == null)
+			{
+				_spinningTopPrefab ??= UnbalancedObjectsList.Instance.GetUnbalancedObject(UnbalancedObjectID.SpinningTop);
+
+				_spinningTop = _spinningTopPrefab.Instantiate() as SpinningTop;
+			}
 			return _spinningTop;
 		}
 
