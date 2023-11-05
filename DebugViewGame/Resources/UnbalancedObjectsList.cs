@@ -12,15 +12,18 @@ namespace CoinDashGaming.DebugViewGame.Resources
 
 	public sealed partial class UnbalancedObjectsList : Resource
 	{
-
+		#region Inspector-Set Fields
 		[Export]
 		private UnbalancedObjectPrefab[] unbalancedObjectPrefabs;
+		#endregion
+
+		public static UnbalancedObjectsList Instance { get; private set; }
 
 		internal PackedScene GetUnbalancedObject(UnbalancedObjectID uObjID)
 		{
 			PackedScene result = null;
 
-			result = unbalancedObjectsPrefabs[uObjID] as PackedScene;
+			result = unbalancedObjectPrefabs[(int)uObjID].PackedScene;
 
 			return result;
 		}
