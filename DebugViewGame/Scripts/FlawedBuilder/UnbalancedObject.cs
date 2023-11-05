@@ -1,21 +1,36 @@
 namespace CoinDashGaming.Scripts.FlawedBuilder
 {
+	using DebugViewGame.Scripts;
 	using Godot;
 
+	[GlobalClass]
 	public partial class UnbalancedObject : Node3D, IUnbalancedObject
 	{
-		public override void _Process(double delta)
-		{
-			base._Process(delta);
-
-			// camera.
-		}
-
-		#region IUnbalancedObject members
+		#region IUnbalancedObject Properties
+		[Export]
+		public RigidBody3D Obj { get; set; }
 		public int TotalFlaws { get; protected set; }
+		public int FlawsSolved { get; protected set; } = 0;
+		public bool isObjectFrozen
+		{
+			get => Obj.Freeze;
+		}
+		#endregion
 
-		public int FlawsSolved { get; protected set; }
+		#region Godot Methods
+		public override void _Input(InputEvent @event)
+		{
+			base._Input(@event);
 
+			if ( isObjectFrozen == false &&
+				 @event.IsActionPressed(InputConstants.INPUT_UI_SELECT) == true)
+			{
+				FreezeForInspection(true);
+			}
+		}
+		#endregion
+
+		#region IUnbalancedObject Methods
 		public void SolveFlaw(int index)
 		{
 			throw new System.NotImplementedException();
@@ -24,6 +39,14 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 		public Signal TestExamination()
 		{
 			throw new System.NotImplementedException();
+		}
+
+		public virtual void FreezeForInspection(bool isFrozen)
+		{
+			if ( Obj is RigidBody3D rb )
+			{
+				rb.Freeze = isFrozen;
+			}
 		}
 		#endregion
 	}

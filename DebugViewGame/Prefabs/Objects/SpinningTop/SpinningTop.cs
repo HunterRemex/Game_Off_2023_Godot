@@ -1,7 +1,9 @@
 namespace CoinDashGaming.DebugViewGame.Prefabs.Objects.SpinningTop
 {
-	using Scripts.FlawedBuilder;
+	using CoinDashGaming.Scripts.FlawedBuilder;
+	using Godot;
 
+	[GlobalClass]
 	public partial class SpinningTop : UnbalancedObject
 	{
 		private int GenerateFlaws()

@@ -13,25 +13,29 @@ height = 0.287463
 height = 0.817524
 radius = 0.102833
 
-[node name="SpinningTop" type="RigidBody3D"]
+[node name="SpinningTop" type="Node3D" node_paths=PackedStringArray("caw", "Obj")]
+script = ExtResource("1_eir37")
+caw = NodePath("SpinningTop")
+Obj = NodePath("SpinningTop")
+
+[node name="SpinningTop" type="RigidBody3D" parent="."]
 mass = 0.1
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.5, 0)
 angular_velocity = Vector3(0.436332, 8.72665, 0)
-script = ExtResource("1_eir37")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpinningTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.686779, 0)
 shape = SubResource("SphereShape3D_ba32w")
 
-[node name="Cylinder" type="MeshInstance3D" parent="."]
+[node name="Cylinder" type="MeshInstance3D" parent="SpinningTop"]
 mesh = ExtResource("1_4bhx8")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="SpinningTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3529, 0)
 shape = SubResource("CylinderShape3D_0oxpd")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="SpinningTop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.409926, 0)
 shape = SubResource("CylinderShape3D_24shj")
