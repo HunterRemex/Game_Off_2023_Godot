@@ -1,9 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://birlm510cee76"]
+[gd_scene load_steps=6 format=3 uid="uid://birlm510cee76"]
 
 [ext_resource type="ArrayMesh" uid="uid://c4pykc17xx22s" path="res://DebugViewGame/Prefabs/Objects/SpinningTop/SpinningTop.tres" id="1_4bhx8"]
 [ext_resource type="Script" path="res://DebugViewGame/Prefabs/Objects/SpinningTop/SpinningTop.cs" id="1_eir37"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rr5vh"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_ba32w"]
+radius = 0.247163
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0oxpd"]
+height = 0.287463
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_24shj"]
+height = 0.817524
+radius = 0.102833
 
 [node name="SpinningTop" type="RigidBody3D"]
 mass = 0.1
@@ -13,8 +21,17 @@ angular_velocity = Vector3(0.436332, 8.72665, 0)
 script = ExtResource("1_eir37")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_rr5vh")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.686779, 0)
+shape = SubResource("SphereShape3D_ba32w")
 
 [node name="Cylinder" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_4bhx8")
 skeleton = NodePath("../..")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3529, 0)
+shape = SubResource("CylinderShape3D_0oxpd")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.409926, 0)
+shape = SubResource("CylinderShape3D_24shj")
