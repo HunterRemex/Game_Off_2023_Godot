@@ -6,9 +6,6 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 
 	public partial class SpinningTopBuilder : IUnbalancedBuilder
 	{
-		#region CONSTANTS
-		private const string PREFAB_METADATA_NAME = "prefabToInstantiate";
-		#endregion
 		#region Private Fields
 		private PackedScene _spinningTopPrefab;
 		private SpinningTop _spinningTop;
