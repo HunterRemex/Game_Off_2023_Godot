@@ -7,6 +7,10 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 	[GlobalClass]
 	public partial class UnbalancedObject : Node3D, IUnbalancedObject
 	{
+		#region CONSTANTS
+		private const float INSPECT_PANNING_SPEED = 500.0f;
+		#endregion
+
 		#region Inspector-Set Fields
 		[Export]
 		private Node3D inspectionTransformNode;
@@ -16,6 +20,7 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 		private Transform3D _preInspectTransform;
 		private Transform3D inspectionTransform;
 		private Task _moveToInspectTask;
+		private bool _isInspectingPanning;
 		#endregion
 
 		#region IUnbalancedObject Properties
@@ -49,7 +54,18 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 			}
 			else if ( isObjectFrozen == true &&
 					  isObjectBeingInspected == true &&
-					  @event is InputEventMouseMotion motion ) { }
+					  @event is InputEventMouseButton mouse)
+			{
+				_isInspectingPanning = mouse.IsActionPressed(InputConstants.INPUT_UI_SELECT);
+			}
+			else if ( isObjectFrozen == true &&
+					  isObjectBeingInspected == true &&
+					  _isInspectingPanning == true &&
+					  @event is InputEventMouseMotion motion )
+			{
+				Obj.GlobalRotate(Vector3.Up, motion.Relative.X / INSPECT_PANNING_SPEED);
+				Obj.GlobalRotate(Vector3.Right, -motion.Relative.Y / INSPECT_PANNING_SPEED);
+			}
 		}
 		#endregion
 
@@ -84,11 +100,14 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 		#region Coroutines
 		private async Task MoveObjToInspectionPosition()
 		{
-			while ( Obj.Transform != inspectionTransform )
+			float alpha = 0.05f;
+			while ( Obj.Transform.Basis.IsEqualApprox(inspectionTransform.Basis) == false )
 			{
-				Obj.Transform = Obj.Transform.InterpolateWith(inspectionTransform, 0.05f);
+				Obj.Transform = Obj.Transform.InterpolateWith(inspectionTransform, alpha);
+				alpha *= 1.01f;
 				await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 			}
+			isObjectBeingInspected = true;
 		}
 		#endregion
 	}
