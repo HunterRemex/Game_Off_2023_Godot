@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://5xycx1sreuon"]
 
-[ext_resource type="Material" uid="uid://cm5epuat5v1ci" path="res://DebugViewGame/Materials/M_Table.tres" id="1_ii6dt"]
+[ext_resource type="Material" uid="uid://cm5epuat5v1ci" path="res://DebugViewGame/Prefabs/InspectorTable/M_Table.tres" id="1_ii6dt"]
 [ext_resource type="Material" uid="uid://chffxwyaxk3xn" path="res://DebugViewGame/Materials/M_Background.tres" id="2_xlycw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i7g2u"]
