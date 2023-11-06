@@ -1,5 +1,6 @@
 namespace CoinDashGaming.Scripts.FlawedBuilder
 {
+	using System.Threading.Tasks;
 	using Godot;
 
 	public interface IUnbalancedObject
@@ -8,11 +9,13 @@ namespace CoinDashGaming.Scripts.FlawedBuilder
 		public int TotalFlaws { get; }
 		public int FlawsSolved { get; }
 		public bool isObjectFrozen { get; }
+		public bool isObjectBeingInspected { get; }
+
 
 		public void SolveFlaw(int index);
 
 		public Signal TestExamination();
 
-		public void FreezeForInspection(bool isFrozen);
+		public Task FreezeForInspection(bool isFrozen);
 	}
 }
