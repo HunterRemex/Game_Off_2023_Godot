@@ -9,16 +9,23 @@ namespace DebugViewGame.Meta
 		private Button startGameButton;
 		#endregion
 
+		private async void StartGameButton_ButtonUp()
+		{
+			await GameController.Instance.TryTransitionToGameplayMode();
+			
+		}
+
+		#region Godot Methods
 		public override void _Ready()
 		{
 			base._Ready();
 			startGameButton.ButtonUp += StartGameButton_ButtonUp;
 		}
 
-		private void StartGameButton_ButtonUp()
+		public override void _ExitTree()
 		{
-			GameController.Instance.TransitionToGameplayMode();
-
+			base._ExitTree();
 		}
+		#endregion
 	}
 }
