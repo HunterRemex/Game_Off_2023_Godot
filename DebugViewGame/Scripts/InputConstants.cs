@@ -1,4 +1,4 @@
-namespace CoinDashGaming.DebugViewGame.Scripts
+namespace DebugViewGame.Meta
 {
 	public record InputConstants
 	{

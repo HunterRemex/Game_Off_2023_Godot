@@ -1,8 +1,8 @@
-namespace CoinDashGaming.Scripts.FlawedBuilder
+namespace DebugViewGame.Scripts.FlawedBuilder
 {
 	using System.Threading.Tasks;
-	using DebugViewGame.Scripts;
 	using Godot;
+	using Meta;
 
 	[GlobalClass]
 	public partial class UnbalancedObject : Node3D, IUnbalancedObject

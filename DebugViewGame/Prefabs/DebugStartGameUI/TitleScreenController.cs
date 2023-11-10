@@ -1,4 +1,4 @@
-namespace CoinDashGaming.DebugViewGame.Prefabs.DebugStartGameUI
+namespace DebugViewGame.Meta
 {
 	using Godot;
 

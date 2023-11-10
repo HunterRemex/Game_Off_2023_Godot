@@ -1,4 +1,4 @@
-namespace CoinDashGaming.Scripts.FlawedBuilder
+namespace DebugViewGame.Scripts.FlawedBuilder
 {
 	using System.Threading.Tasks;
 	using Godot;
