@@ -1,8 +1,0 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://p8by6lj70jt"]
-
-[ext_resource type="Script" path="res://DebugViewGame/Resources/UnbalancedObjectsList.cs" id="1_avqle"]
-[ext_resource type="Resource" uid="uid://c3bh8fca8b27b" path="res://DebugViewGame/Prefabs/DebugStartGameUI/SpinningTop/SpinningTopResource.tres" id="2_b04l6"]
-
-[resource]
-script = ExtResource("1_avqle")
-unbalancedObjectPrefabs = Array[Resource]([ExtResource("2_b04l6")])
