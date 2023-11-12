@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://5xycx1sreuon"]
+[gd_scene load_steps=5 format=3 uid="uid://5xycx1sreuon"]
 
 [ext_resource type="Material" uid="uid://cm5epuat5v1ci" path="res://DebugViewGame/Prefabs/InspectorTable/M_Table.tres" id="1_ii6dt"]
 [ext_resource type="Material" uid="uid://chffxwyaxk3xn" path="res://DebugViewGame/Materials/M_Background.tres" id="2_xlycw"]
-[ext_resource type="Script" path="res://DebugViewGame/Prefabs/DebugStartGameUI/GameController.cs" id="3_y8avk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i7g2u"]
 
@@ -46,6 +45,3 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
 transform = Transform3D(25, 0, 0, 0, -4.37114e-08, -10, 0, 1, -4.37114e-07, 0, 3, 9)
 shape = SubResource("BoxShape3D_i7g2u")
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("3_y8avk")
