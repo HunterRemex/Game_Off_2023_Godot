@@ -10,7 +10,7 @@
 [node name="InspectorTable" type="Node3D"]
 
 [node name="Table" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.583095, 0.69351, 3.0796)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.694, 3.08)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
 transform = Transform3D(5, 0, 0, 0, 0.25, 0, 0, 0, 2, 0, 0, 0)

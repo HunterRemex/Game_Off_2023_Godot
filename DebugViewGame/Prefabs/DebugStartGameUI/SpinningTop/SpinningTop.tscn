@@ -41,4 +41,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.409926, 0)
 shape = SubResource("CylinderShape3D_24shj")
 
 [node name="InspectTx" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.949967, -0.312351, 0, 0.312351, 0.949967, -2.38419e-07, 0.365017, -2.01527)
+transform = Transform3D(1, 0, 0, 0, 0.949967, -0.312351, 0, 0.312351, 0.949967, -2.38419e-07, 0.896718, -2.33586)

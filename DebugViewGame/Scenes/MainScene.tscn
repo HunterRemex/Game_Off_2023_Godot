@@ -22,7 +22,6 @@ glow_enabled = true
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_mh4t2"]
 
 [node name="MainScene" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.85817, -2.8739)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5dwtu")
@@ -34,10 +33,11 @@ light_angular_distance = 2.5
 directional_shadow_mode = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, -4.76837e-07, 3.22672, -3.69624)
+transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, -4.76837e-07, 1.81466, -6.87029)
 fov = 51.282
 
 [node name="InspectorTable" parent="." instance=ExtResource("1_mudpy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.08531, -2.76864)
 
 [node name="--GAME_CONTROLLER--" type="Node3D" parent="."]
 script = ExtResource("3_4c55n")
