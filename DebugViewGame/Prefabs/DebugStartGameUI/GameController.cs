@@ -3,9 +3,10 @@ namespace DebugViewGame.Meta
 	using System;
 	using System.Threading.Tasks;
 	using Godot;
+	using Scripts.FlawedBuilder;
 
 	[GlobalClass]
-	public partial class GameController : Node
+	public partial class GameController : Node3D
 	{
 		#region Singleton
 		public static GameController Instance { get; private set; }
@@ -13,22 +14,29 @@ namespace DebugViewGame.Meta
 
 		#region Inspector-Set Fields
 		[Export]
-		private PackedScene _titleScreenGUIScene;
+		private PackedScene _titleScreenGUISceneResource { get; set; }
+
 		[Export]
 		private PackedScene _gameplayScreenGUIScene;
 		#endregion
 
 		#region Private Variables
 		private bool _titleScreenIsVisible = false;
+
+		private TitleScreenController _controllerTitleScreen;
+		private FlawedObjectBuildDirector _buildDirector;
 		#endregion
 
 		#region Public Methods
 		public async Task<bool> TryTransitionToGameplayMode()
 		{
 			// Disable Title Screen
+			_controllerTitleScreen.Visible = false;
 
 			// Enable Object Spawner
+			_buildDirector = new FlawedObjectBuildDirector();
 
+			AddChild(_buildDirector.BuildUnbalancedObject(UnbalancedObjectID.SpinningTop));
 			// Enable Gameplay UI~
 
 			return true;
@@ -50,9 +58,11 @@ namespace DebugViewGame.Meta
 
 		private void LoadTitleScreen()
 		{
-			if ( _titleScreenGUIScene != null )
+			if ( _titleScreenGUISceneResource != null )
 			{
-				_titleScreenGUIScene.Instantiate();
+				_controllerTitleScreen = _titleScreenGUISceneResource.Instantiate<TitleScreenController>();
+				AddChild(_controllerTitleScreen);
+				_titleScreenIsVisible = true;
 			}
 			else
 			{
@@ -62,11 +72,6 @@ namespace DebugViewGame.Meta
 		#endregion
 
 		#region Godot Methods
-		public override void _Process(double delta)
-		{
-			base._Process(delta);
-		}
-
 		public override void _Ready()
 		{
 			StartSingleton();
