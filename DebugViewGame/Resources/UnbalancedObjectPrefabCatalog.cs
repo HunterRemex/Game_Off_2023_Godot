@@ -1,8 +1,9 @@
-namespace CoinDashGaming.DebugViewGame.Resources
+namespace DebugViewGame.Gameplay
 {
 	using System.Linq;
 	using Godot;
 	using Godot.Collections;
+	using Meta;
 
 	[GlobalClass]
 	public sealed partial class UnbalancedObjectPrefabCatalog : Node

@@ -1,4 +1,4 @@
-namespace CoinDashGaming.DebugViewGame.Resources
+namespace DebugViewGame.Meta
 {
 	public enum UnbalancedObjectID
 	{

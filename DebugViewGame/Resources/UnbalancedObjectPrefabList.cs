@@ -1,7 +1,6 @@
-namespace CoinDashGaming.DebugViewGame.Resources
+namespace DebugViewGame.Meta
 {
-	using System.Collections;
-	using System.Collections.Generic;
+	using Gameplay;
 	using Godot;
 
 	public sealed partial class UnbalancedObjectPrefabList : Resource

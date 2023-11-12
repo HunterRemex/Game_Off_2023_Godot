@@ -1,8 +1,8 @@
 namespace DebugViewGame.Scripts.FlawedBuilder
 {
-	using CoinDashGaming.DebugViewGame.Resources;
 	using Gameplay;
 	using Godot;
+	using Meta;
 
 	public partial class SpinningTopBuilder : IUnbalancedBuilder
 	{
@@ -20,7 +20,7 @@ namespace DebugViewGame.Scripts.FlawedBuilder
 		{
 			if (_spinningTop == null)
 			{
-				_spinningTopPrefab ??= UnbalancedObjectsList.Instance.GetUnbalancedObject(UnbalancedObjectID.SpinningTop);
+				_spinningTopPrefab ??= UnbalancedObjectPrefabCatalog.Instance.GetUnbalancedObjectPrefab(UnbalancedObjectID.SpinningTop);
 
 				_spinningTop = _spinningTopPrefab.Instantiate() as SpinningTop;
 			}
@@ -30,6 +30,7 @@ namespace DebugViewGame.Scripts.FlawedBuilder
 		public Node GetConstructedObject()
 		{
 			SpinningTop node = _spinningTop;
+
 			if ( _spinningTop == null )
 			{
 				node = Build() as SpinningTop;

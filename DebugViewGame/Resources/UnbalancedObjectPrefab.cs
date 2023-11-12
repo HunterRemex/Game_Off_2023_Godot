@@ -1,6 +1,7 @@
-namespace CoinDashGaming.DebugViewGame.Resources
+namespace DebugViewGame.Gameplay
 {
 	using Godot;
+	using Meta;
 
 	public partial class UnbalancedObjectPrefab : Resource
 	{
