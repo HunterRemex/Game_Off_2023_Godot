@@ -9,6 +9,7 @@ namespace DebugViewGame.Scripts.FlawedBuilder
 	{
 		#region CONSTANTS
 		private const float INSPECT_PANNING_SPEED = 500.0f;
+		private const float INSPECT_SCROLL_DISTANCE = 0.125f;
 		#endregion
 
 		#region Inspector-Set Fields
@@ -20,7 +21,8 @@ namespace DebugViewGame.Scripts.FlawedBuilder
 		private Transform3D _preInspectTransform;
 		private Transform3D inspectionTransform;
 		private Task _moveToInspectTask;
-		private bool _isInspectingPanning;
+		private bool _isInspectRotating;
+		private bool _isInspectPanning;
 		#endregion
 
 		#region IUnbalancedObject Properties
@@ -46,25 +48,44 @@ namespace DebugViewGame.Scripts.FlawedBuilder
 		{
 			base._Input(@event);
 
-			if ( isObjectFrozen == false &&
-				 isObjectBeingInspected == false &&
-				 @event.IsActionPressed(InputConstants.INPUT_UI_SELECT) == true )
+			if ( isObjectFrozen == true )
+			{
+				if ( isObjectBeingInspected == true &&
+					 @event is InputEventMouseButton mouse )
+				{
+					_isInspectRotating = mouse.IsActionPressed(InputConstants.INPUT_UI_SELECT);
+					_isInspectPanning = mouse.IsActionPressed(InputConstants.INPUT_UI_PAN);
+				}
+				else if ( isObjectBeingInspected == true &&
+						  _isInspectRotating == true &&
+						  @event is InputEventMouseMotion motionRotate )
+				{
+					Obj.GlobalRotate(Vector3.Up, motionRotate.Relative.X / INSPECT_PANNING_SPEED);
+					Obj.GlobalRotate(Vector3.Right, -motionRotate.Relative.Y / INSPECT_PANNING_SPEED);
+				}
+				else if ( isObjectBeingInspected == true &&
+						  _isInspectPanning == true &&
+						  @event is InputEventMouseMotion motionPan )
+				{
+					Vector3 offset = new Vector3(-motionPan.Relative.X / INSPECT_PANNING_SPEED, -motionPan.Relative.Y / INSPECT_PANNING_SPEED, 0.0f);
+					offset = offset.Rotated(Vector3.Right, inspectionTransformNode.Rotation.X);
+					Obj.GlobalTranslate(offset);
+				}
+
+				if ( isObjectBeingInspected == true &&
+					 @event is InputEventMouseButton { ButtonIndex: MouseButton.WheelDown or MouseButton.WheelUp } mouseScroll)
+				{
+					float sign = mouseScroll.ButtonIndex == MouseButton.WheelDown ? 1.0f : -1.0f;
+					Vector3 offset = new Vector3(0.0f, 0.0f, mouseScroll.Factor * sign * INSPECT_SCROLL_DISTANCE);
+					offset = offset.Rotated(Vector3.Right, inspectionTransformNode.Rotation.X);
+					Obj.GlobalTranslate(offset);
+				}
+			}
+			else if ( isObjectFrozen == false &&
+					  isObjectBeingInspected == false &&
+					  @event.IsActionPressed(InputConstants.INPUT_UI_SELECT) == true )
 			{
 				await FreezeForInspection(true);
-			}
-			else if ( isObjectFrozen == true &&
-					  isObjectBeingInspected == true &&
-					  @event is InputEventMouseButton mouse)
-			{
-				_isInspectingPanning = mouse.IsActionPressed(InputConstants.INPUT_UI_SELECT);
-			}
-			else if ( isObjectFrozen == true &&
-					  isObjectBeingInspected == true &&
-					  _isInspectingPanning == true &&
-					  @event is InputEventMouseMotion motion )
-			{
-				Obj.GlobalRotate(Vector3.Up, motion.Relative.X / INSPECT_PANNING_SPEED);
-				Obj.GlobalRotate(Vector3.Right, -motion.Relative.Y / INSPECT_PANNING_SPEED);
 			}
 		}
 		#endregion
@@ -107,6 +128,7 @@ namespace DebugViewGame.Scripts.FlawedBuilder
 				alpha *= 1.01f;
 				await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 			}
+
 			isObjectBeingInspected = true;
 		}
 		#endregion
