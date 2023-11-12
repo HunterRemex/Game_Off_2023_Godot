@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2g6ru1lres6j"]
+[gd_scene load_steps=10 format=3 uid="uid://b2g6ru1lres6j"]
 
-[ext_resource type="PackedScene" uid="uid://dw6xalc642l6l" path="res://DebugViewGame/Prefabs/DebugStartGameUI/DVStartScreen.tscn" id="1_m321m"]
 [ext_resource type="PackedScene" uid="uid://5xycx1sreuon" path="res://DebugViewGame/Prefabs/InspectorTable/InspectorTable.tscn" id="1_mudpy"]
 [ext_resource type="Script" path="res://DebugViewGame/Prefabs/DebugStartGameUI/GameController.cs" id="3_4c55n"]
-[ext_resource type="PackedScene" uid="uid://birlm510cee76" path="res://DebugViewGame/Prefabs/DebugStartGameUI/SpinningTop/SpinningTop.tscn" id="3_u06oy"]
+[ext_resource type="Script" path="res://DebugViewGame/Resources/UnbalancedObjectPrefabCatalog.cs" id="4_fary7"]
+[ext_resource type="PackedScene" uid="uid://dw6xalc642l6l" path="res://DebugViewGame/Prefabs/DebugStartGameUI/DVStartScreen.tscn" id="4_oo1bc"]
+[ext_resource type="Resource" uid="uid://c3bh8fca8b27b" path="res://DebugViewGame/Prefabs/DebugStartGameUI/SpinningTop/SpinningTopResource.tres" id="5_lc20v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cgjjh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,6 +22,7 @@ glow_enabled = true
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_mh4t2"]
 
 [node name="MainScene" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.85817, -2.8739)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5dwtu")
@@ -37,9 +39,10 @@ fov = 51.282
 
 [node name="InspectorTable" parent="." instance=ExtResource("1_mudpy")]
 
-[node name="SpinningTop" parent="." instance=ExtResource("3_u06oy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 3)
-
-[node name="--GAME_CONTROLLER--" type="Node" parent="."]
+[node name="--GAME_CONTROLLER--" type="Node3D" parent="."]
 script = ExtResource("3_4c55n")
-_titleScreenGUIScene = ExtResource("1_m321m")
+_titleScreenGUISceneResource = ExtResource("4_oo1bc")
+
+[node name="UnbalancedObjectPrefabManager" type="Node" parent="--GAME_CONTROLLER--"]
+script = ExtResource("4_fary7")
+unbalancedObjectPrefabs = Array[Resource]([ExtResource("5_lc20v")])
