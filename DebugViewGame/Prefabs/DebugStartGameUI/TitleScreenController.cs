@@ -2,7 +2,7 @@ namespace DebugViewGame.Meta
 {
 	using Godot;
 
-	public partial class TitleScreenController : Node3D
+	public partial class TitleScreenController : Control
 	{
 		#region Inspector-Set Fields
 		[Export]
