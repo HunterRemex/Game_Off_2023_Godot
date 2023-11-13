@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://c3bh8fca8b27b"]
 
-[ext_resource type="PackedScene" uid="uid://birlm510cee76" path="res://DebugViewGame/Prefabs/Objects/SpinningTop/SpinningTop.tscn" id="1_g5p3r"]
+[ext_resource type="PackedScene" uid="uid://birlm510cee76" path="res://DebugViewGame/Prefabs/DebugStartGameUI/SpinningTop/SpinningTop.tscn" id="1_g5p3r"]
 [ext_resource type="Script" path="res://DebugViewGame/Resources/UnbalancedObjectPrefab.cs" id="1_kje4m"]
 
 [resource]
